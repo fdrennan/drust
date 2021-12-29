@@ -8,3 +8,11 @@
 #' @useDynLib rustr, .registration = TRUE
 NULL
 
+#' execute_lr
+#' TODO execute_lf
+#'
+#' ## Linear Regression from Rust
+#'
+#' @export
+execute_lr <- function(dataset, col_names, types) .Call(wrap__execute_lr, dataset, col_names, types)
+
