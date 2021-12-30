@@ -12,5 +12,6 @@ LazyData: true
 Suggests:
     rextendr,
     devtools,
-    usethis
+    usethis,
+    styler
 RoxygenNote: 7.1.2

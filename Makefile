@@ -1,4 +1,4 @@
-build:
+build: style
 	R -e "rextendr::document()"
 	R CMD INSTALL .
 	Rscript main.R
