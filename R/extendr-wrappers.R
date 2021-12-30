@@ -14,5 +14,5 @@ NULL
 #' ## Linear Regression from Rust
 #'
 #' @export
-execute_lr <- function(data, col_names, types) .Call(wrap__execute_lr, data, col_names, types)
+execute_lr <- function(data, col_names, types, dataset) .Call(wrap__execute_lr, data, col_names, types, dataset)
 

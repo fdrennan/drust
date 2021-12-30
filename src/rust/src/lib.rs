@@ -28,31 +28,21 @@ use ndarray::{Data, ShapeBuilder};
 ///
 /// @export
 #[extendr]
-pub fn execute_lr(data: Robj, col_names: Robj, types: Robj) -> Robj {
-    let data = data.as_real_vector().unwrap();
-    let colnames = col_names.as_str_vector().unwrap();
-    let mut cols_iterator = data
-        .chunks_exact(col_names.len())
-        .into_iter();
-    let mut vec_df: Vec<Series> = Vec::new();
-    for key in colnames {
-        let value = cols_iterator.next().unwrap();
-        println!("{:?}, {:?}", key, value);
-        let s = Series::new(key, value);
-        vec_df.push(s);
+pub fn execute_lr(data: Robj, col_names: Robj, types: Robj, dataset: Robj) -> Robj {
+    let col_names = dataset.names().unwrap();
+    let mut df_cols: Vec<Series> = Vec::new();
+    for col in col_names {
+        let col_data = dataset
+            .dollar(col)
+            .unwrap()
+            .as_real_vector()
+            .unwrap();
+        let s = Series::new(col, col_data);
+        df_cols.push(s)
     }
-    let df = DataFrame::new(vec_df);
+    let df = DataFrame::new(df_cols);
     println!("{:?}", df);
     types
-    // let start = PreciseTime::now();
-    // println!("{:?}", dataset);
-    // whatever you want to do
-
-    // let df = read_csv(&file_path).unwrap();
-    // let predictions = linear_regression(&df, target);
-    // let end = PreciseTime::now();
-    // rprintln!("{} seconds elapsed...", start.to(end));
-    // predictions.into_robj()
 }
 
 #[cfg(test)]
