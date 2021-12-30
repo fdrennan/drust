@@ -2,17 +2,25 @@
 
 // #![cfg_attr(debug_assertions, allow(dead_code, unused_imports))]
 use extendr_api::prelude::*;
-
+use polars::prelude::*;
 mod pipeline;
+
+fn parse_robj(dataset: &Robj) -> Vec<f64> {
+    let mut vect = Vec::new();
+    for x in dataset.as_real_iter() {
+        x.for_each(|y| vect.push(*y))
+    }
+    vect
+}
 
 use pipeline::dev::features::linear_regression;
 use pipeline::dev::io::read_csv;
 
 use time::PreciseTime;
 
+use ndarray::arr2;
 use ndarray::prelude::*;
 use ndarray::{Data, ShapeBuilder};
-use ndarray::arr2;
 /// execute_lr
 /// TODO execute_lf
 ///
@@ -20,32 +28,22 @@ use ndarray::arr2;
 ///
 /// @export
 #[extendr]
-pub fn execute_lr(dataset: Robj, col_names: Robj, types: Robj) -> Robj {
-    fn parse_robj(dataset: Robj) -> Vec<&'static str> {
-        let mut vect = Vec::new();
-        for x in dataset.as_str_iter() {
-            x.for_each(|y| vect.push(y))
-        }
-        vect
+pub fn execute_lr(data: Robj, col_names: Robj, types: Robj) -> Robj {
+    let data = data.as_real_vector().unwrap();
+    let colnames = col_names.as_str_vector().unwrap();
+    let mut cols_iterator = data
+        .chunks_exact(col_names.len())
+        .into_iter();
+    let mut vec_df: Vec<Series> = Vec::new();
+    for key in colnames {
+        let value = cols_iterator.next().unwrap();
+        println!("{:?}, {:?}", key, value);
+        let s = Series::new(key, value);
+        vec_df.push(s);
     }
-    let data = parse_robj(dataset);
-    let col_names = parse_robj(col_names);
-    let types = parse_robj(types);
-    let chunk_len = data.len()/col_names.len();
-    rprintln!("{:?}", chunk_len);
-
-    let mut arr = Array1::<i32>::default(data.len());
-
-
-    let mut data_iter = data.chunks_exact(chunk_len);
-    for col in col_names {
-        let data_next = data_iter.next().unwrap();
-        println!("{:?}", col);
-        println!("{:?}", data_next);
-    }
-    println!("{:?}", arr);
-
-    data.into_robj()
+    let df = DataFrame::new(vec_df);
+    println!("{:?}", df);
+    types
     // let start = PreciseTime::now();
     // println!("{:?}", dataset);
     // whatever you want to do
