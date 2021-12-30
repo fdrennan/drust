@@ -28,7 +28,7 @@ use ndarray::{Data, ShapeBuilder};
 ///
 /// @export
 #[extendr]
-pub fn execute_lr(data: Robj, col_names: Robj, types: Robj, dataset: Robj) -> Robj {
+pub fn execute_lr(dataset: Robj) -> Robj {
     let col_names = dataset.names().unwrap();
     let mut df_cols: Vec<Series> = Vec::new();
     for col in col_names {
@@ -42,7 +42,7 @@ pub fn execute_lr(data: Robj, col_names: Robj, types: Robj, dataset: Robj) -> Ro
     }
     let df = DataFrame::new(df_cols);
     println!("{:?}", df);
-    types
+    dataset
 }
 
 #[cfg(test)]

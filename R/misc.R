@@ -34,12 +34,7 @@
 #' @param target
 #' @export
 execute_lr <- function(dataset = NULL, target = "chas") {
-  cli_alert_info('Converting data.frame to vector in R')
-  types <- map_chr(dataset, typeof)
-  col_names <- colnames(dataset)
-  data_vec <- as_vector(dataset)
-  cli_alert_info('...done')
   .Call(
-    wrap__execute_lr, data_vec, col_names, types, dataset
+    wrap__execute_lr, dataset
   )
 }
