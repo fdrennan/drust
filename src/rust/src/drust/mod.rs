@@ -1,3 +1,19 @@
+pub mod io {
+    use extendr_api::prelude::*;
+    use polars::frame::DataFrame;
+    use polars::prelude::*;
+    pub fn dataframe_to_polars(dataset: &Robj) -> DataFrame {
+        let col_names = dataset.names().unwrap();
+        let mut df_cols: Vec<Series> = Vec::new();
+        for col in col_names {
+            let col_data = dataset.dollar(col).unwrap().as_real_vector().unwrap();
+            let s = Series::new(col, col_data);
+            df_cols.push(s)
+        }
+        let df = DataFrame::new(df_cols);
+        df.unwrap()
+    }
+}
 pub mod dev {
     pub mod io {
         use polars::frame::DataFrame;
@@ -5,6 +21,8 @@ pub mod dev {
         use polars::prelude::{CsvReader, SerReader};
         use std::fs::File;
         use std::path::Path;
+
+
         pub fn read_csv<P: AsRef<Path>>(path: P) -> PolarResult<DataFrame> {
             let file = File::open(path).expect("Cannot open file.");
             let df = CsvReader::new(file).has_header(true).finish();
@@ -13,6 +31,8 @@ pub mod dev {
     }
 
     pub mod features {
+
+        use smartcore::metrics::mean_squared_error;
 
         use extendr_api::prelude::*;
         use polars::frame::DataFrame;
@@ -74,7 +94,7 @@ pub mod dev {
             (x_matrix.unwrap(), y)
         }
 
-        use smartcore::metrics::mean_squared_error;
+
 
         pub fn linear_regression(df: &DataFrame, target: &str) -> Vec<f64> {
             let (features, target) = feature_and_target(df, target);

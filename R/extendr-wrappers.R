@@ -11,7 +11,8 @@ NULL
 #' execute_lr
 #' TODO execute_lf
 #'
-#' ## Linear Regression from Rust
+#' ## Linear Regression from Rus
 #'
 #' @export
 execute_lr <- function(dataset) .Call(wrap__execute_lr, dataset)
+
