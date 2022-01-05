@@ -16,6 +16,8 @@ arrow = "4.3.0"
 smartcore = "0.2.0"
 serde_derive = "1.0.126"
 time = "*"
-extendr-engine = { git = "https://github.com/extendr/extendr.git" }
-extendr-api = { git = "https://github.com/extendr/extendr.git" }
+extendr-engine = { git = 'https://github.com/extendr/extendr/' }
+extendr-api = { git = 'https://github.com/extendr/extendr/' }
 ndarray = "0.15.4"
+itertools = "0.10.3"
+prettycli = "0.1.1"

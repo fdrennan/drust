@@ -11,6 +11,7 @@ execute_lr(dataset = NULL, target = "chas")
 }
 \description{
 ## Linear Regression from Rus
+|>
 
 #' Addition of Integers
 #' @export

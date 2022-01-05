@@ -35,6 +35,7 @@
 #' @export
 execute_lr <- function(dataset = NULL, target = "chas") {
   .Call(
-    wrap__execute_lr, dataset
+    wrap__execute_lr, dataset, target
   )
 }
+

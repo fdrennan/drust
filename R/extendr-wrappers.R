@@ -12,7 +12,7 @@ NULL
 #' TODO execute_lf
 #'
 #' ## Linear Regression from Rus
-#'
+#' |>
 #' @export
-execute_lr <- function(dataset) .Call(wrap__execute_lr, dataset)
+execute_lr <- function(dataset, target) .Call(wrap__execute_lr, dataset, target)
 
