@@ -14,8 +14,9 @@ use pipeline::io::dataframe_to_polars;
 /// |>
 /// @export
 #[extendr]
-pub fn execute_lr(dataset: Robj, target: &str) -> Robj {
-    println!("Dataset received on Rust side");
+pub fn execute_lr(dataset: Robj, dtypes: Robj, target: &str) -> Robj {
+    println!("Dataset received on Rust");
+    println!("dtypes {:?}", dtypes);
     println!("{:?}", dataset);
     let df = dataframe_to_polars(&dataset);
     // println!("{:?}", df);
@@ -35,9 +36,10 @@ mod tests {
     fn dataframe() {
         test! {
             let res = data_frame!(x = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], y = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+            let dtypes = r!(["integer", "integer"]);
             // TODO - Data Frame needs to parse correctly with execute_lr.
             println!("{:?}", res);
-            let res = execute_lr(res, "y");
+            let res = execute_lr(res, dtypes, "y");
             // println!("{:?}", res);
             assert_eq!(1, 1);
         }

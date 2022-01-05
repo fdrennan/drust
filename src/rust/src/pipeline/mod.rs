@@ -2,7 +2,6 @@ pub mod io {
     use extendr_api::prelude::*;
     use polars::frame::DataFrame;
     use polars::prelude::*;
-    use std::process;
 
     pub fn dataframe_to_polars(dataset: &Robj) -> DataFrame {
         let col_names = dataset.names().unwrap();
@@ -13,6 +12,7 @@ pub mod io {
             let s = Series::new(col, col_data);
             df_cols.push(s)
         }
+
         println!("df_cols = {:?}", df_cols);
         let df = DataFrame::new(df_cols);
         df.unwrap()
@@ -20,7 +20,6 @@ pub mod io {
 }
 
 pub mod features {
-    use smartcore::metrics::mean_squared_error;
     use extendr_api::prelude::*;
     use polars::frame::DataFrame;
     use polars::prelude::Float64Type;
@@ -28,6 +27,7 @@ pub mod features {
     use smartcore::linalg::naive::dense_matrix::DenseMatrix;
     use smartcore::linalg::BaseMatrix;
     use smartcore::linear::linear_regression::LinearRegression;
+    use smartcore::metrics::mean_squared_error;
     use smartcore::model_selection::train_test_split;
     use std::convert::TryFrom;
     pub fn feature_and_target(

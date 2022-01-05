@@ -34,8 +34,8 @@
 #' @param target
 #' @export
 execute_lr <- function(dataset = NULL, target = "chas") {
+  types <- map_chr(dataset, typeof)
   .Call(
-    wrap__execute_lr, dataset, target
+    wrap__execute_lr, dataset, types, target
   )
 }
-

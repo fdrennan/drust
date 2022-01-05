@@ -4,6 +4,8 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src/rust/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/src/rust/target" />
+      <excludeFolder url="file://$MODULE_DIR$/renv" />
+      <excludeFolder url="file://$MODULE_DIR$/.Rproj.user" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
