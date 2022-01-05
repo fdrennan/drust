@@ -16,9 +16,9 @@
       <option name="outputFromStdout" value="false" />
       <option name="program" value="cargo" />
       <option name="runOnExternalChanges" value="true" />
-      <option name="scopeName" value="Project Files" />
+      <option name="scopeName" value="Module 'rustr'" />
       <option name="trackOnlyRoot" value="false" />
-      <option name="workingDir" value="" />
+      <option name="workingDir" value="$PROJECT_DIR$/src/rust" />
       <envs />
     </TaskOptions>
     <TaskOptions isEnabled="false">

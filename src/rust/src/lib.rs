@@ -17,12 +17,11 @@ use pipeline::io::dataframe_to_polars;
 pub fn execute_lr(dataset: Robj, dtypes: Robj, target: &str) -> Robj {
     println!("Dataset received on Rust");
     println!("dtypes {:?}", dtypes);
-    println!("{:?}", dataset);
     let df = dataframe_to_polars(&dataset);
-    // println!("{:?}", df);
     let response = linear_regression(&df, target);
     response.into_robj()
 }
+
 
 #[cfg(test)]
 mod tests {
@@ -35,13 +34,17 @@ mod tests {
     #[test]
     fn dataframe() {
         test! {
-            let res = data_frame!(x = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], y = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+            let res = data_frame!(
+                x = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                y = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+            );
+
             let dtypes = r!(["integer", "integer"]);
             // TODO - Data Frame needs to parse correctly with execute_lr.
-            println!("{:?}", res);
+            // println!("{:?}", res);
             let res = execute_lr(res, dtypes, "y");
             // println!("{:?}", res);
-            assert_eq!(1, 1);
+            assert_eq!(3, res.len());
         }
     }
 
