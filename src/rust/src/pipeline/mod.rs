@@ -3,14 +3,35 @@ pub mod io {
     use polars::frame::DataFrame;
     use polars::prelude::*;
 
-    pub fn dataframe_to_polars(dataset: &Robj) -> DataFrame {
+    pub fn dataframe_to_polars(dataset: &Robj, dtypes: Robj) -> DataFrame {
         let col_names = dataset.names().unwrap();
+        let dtypes = dtypes.as_str_vector().unwrap();
+        let it = col_names.into_iter().zip(dtypes.iter());
+
         let mut df_cols: Vec<Series> = Vec::new();
-        for col in col_names {
-            let col_data = dataset.dollar(col).unwrap();
-            let col_data = col_data.as_integer_vector().unwrap();
-            let s = Series::new(col, col_data);
-            df_cols.push(s)
+        for (col, dtype) in it.into_iter() {
+            let message = format!("Converting {} to {}", col, dtype);
+            prettycli::info(message.as_str());
+            match *dtype {
+                "integer" => {
+                    let col_data = dataset.dollar(col).unwrap();
+                    let col_data = col_data.as_integer_vector().unwrap();
+                    let s = Series::new(col, col_data);
+                    df_cols.push(s)
+                }
+                "double" => {
+                    let col_data = dataset.dollar(col).unwrap();
+                    let col_data = col_data.as_real_vector().unwrap();
+                    let s = Series::new(col, col_data);
+                    df_cols.push(s)
+                }
+                _ => {
+                    let col_data = dataset.dollar(col).unwrap();
+                    let col_data = col_data.as_string_vector().unwrap();
+                    let s = Series::new(col, col_data);
+                    df_cols.push(s)
+                }
+            };
         }
 
         println!("df_cols = {:?}", df_cols);

@@ -39,3 +39,12 @@ execute_lr <- function(dataset = NULL, target = "chas") {
     wrap__execute_lr, dataset, types, target
   )
 }
+
+#' return_df
+#' @export return_df
+return_df <- function(dataset = NULL) {
+  types <- map_chr(dataset, typeof)
+  .Call(
+    wrap__return_df, dataset, types
+  )
+}
