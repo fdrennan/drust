@@ -8,11 +8,15 @@
 #' @useDynLib rustr, .registration = TRUE
 NULL
 
-#' execute_lr
-#' TODO execute_lf
-#'
-#' ## Linear Regression from Rus
-#' |>
-#' @export
-execute_lr <- function(dataset, target) .Call(wrap__execute_lr, dataset, target)
-
+#' return_df
+#' @export return_df
+return_df <- function(dataset = NULL) {
+  types <- map_chr(dataset, typeof)
+  row.names(dataset) <- NULL
+  cli_alert_info("Before .Call")
+  out <- .Call(
+    wrap__return_df, dataset, types
+  )
+  cli_alert_info("After .Call")
+  out
+}
