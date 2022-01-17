@@ -1,6 +1,6 @@
 LIBDIR = ./rust/target/release
-STATLIB = $(LIBDIR)/librustr.a
-PKG_LIBS = -L$(LIBDIR) -lrustr
+STATLIB = $(LIBDIR)/libredpul.a
+PKG_LIBS = -L$(LIBDIR) -lredpul
 
 all: C_clean
 

@@ -1,4 +1,5 @@
 build: style
+	R -e "rextendr::document()"
 	R -e "devtools::document()"
 	R CMD INSTALL .
 	Rscript main.R

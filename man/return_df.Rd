@@ -2,10 +2,11 @@
 % Please edit documentation in R/extendr-wrappers.R
 \name{return_df}
 \alias{return_df}
-\title{return_df}
+\title{return_df
+TODO execute_lf}
 \usage{
-return_df(dataset = NULL)
+return_df(dataset, dtypes)
 }
 \description{
-return_df
+## Linear Regression from Rust
 }

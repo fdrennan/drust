@@ -16,7 +16,7 @@
       <option name="outputFromStdout" value="false" />
       <option name="program" value="cargo" />
       <option name="runOnExternalChanges" value="true" />
-      <option name="scopeName" value="Module 'rustr'" />
+      <option name="scopeName" value="Module 'redpul'" />
       <option name="trackOnlyRoot" value="false" />
       <option name="workingDir" value="$PROJECT_DIR$/src/rust" />
       <envs />

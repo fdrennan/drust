@@ -935,6 +935,26 @@ dependencies = [
 ]
 
 [[package]]
+name = "redpul"
+version = "0.1.0"
+dependencies = [
+ "arrow",
+ "extendr-api",
+ "extendr-engine",
+ "itertools",
+ "ndarray",
+ "polars",
+ "polars-core",
+ "prettycli",
+ "rand 0.8.4",
+ "serde",
+ "serde_derive",
+ "serde_json",
+ "smartcore",
+ "time 0.3.5",
+]
+
+[[package]]
 name = "regex"
 version = "1.5.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -967,26 +987,6 @@ dependencies = [
  "blake2b_simd",
  "constant_time_eq",
  "crossbeam-utils",
-]
-
-[[package]]
-name = "rustr"
-version = "0.1.0"
-dependencies = [
- "arrow",
- "extendr-api",
- "extendr-engine",
- "itertools",
- "ndarray",
- "polars",
- "polars-core",
- "prettycli",
- "rand 0.8.4",
- "serde",
- "serde_derive",
- "serde_json",
- "smartcore",
- "time 0.3.5",
 ]
 
 [[package]]

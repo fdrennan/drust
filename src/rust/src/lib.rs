@@ -1,4 +1,3 @@
-//! TODO: Write crate docs
 #![cfg_attr(debug_assertions, allow(dead_code, unused_imports))]
 
 use extendr_api::prelude::*;
@@ -136,6 +135,6 @@ pub fn return_df(dataset: Robj, dtypes: Robj) -> Robj {
 //
 // See corresponding C code in `entrypoint.c`.
 extendr_module! {
-    mod rustr;
+    mod redpul;
     fn return_df;
 }
